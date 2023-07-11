@@ -1,0 +1,12 @@
+.nav-link {
+  color: var(--bs-secondary);
+  font-weight: 500;
+  border: none;
+  border-bottom: 3px solid transparent;
+
+  &.active {
+    background-color: transparent;
+    border-color: var(--bs-primary);
+    color: var(--bs-primary);
+  }
+}

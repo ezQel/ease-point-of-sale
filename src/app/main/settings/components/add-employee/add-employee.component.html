@@ -1,0 +1,38 @@
+<div class="modal-header border-0">
+  <h5 class="modal-title">Add an Employee</h5>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="employeeForm" class="form">
+    <p *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </p>
+
+    <div class="form-group mb-4">
+      <label for="email" class="form-label">Email *</label>
+
+      <input
+        id="email"
+        type="email"
+        class="form-control"
+        formControlName="email"
+        required
+      />
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer border-0 text-end">
+  <button type="button" class="btn btn-md" (click)="modal.dismiss()">
+    Cancel
+  </button>
+
+  <button
+    type="button"
+    class="btn btn-md btn-primary ms-2"
+    [disabled]="buttonDisabled"
+    (click)="addEmployee()"
+  >
+    Add
+  </button>
+</div>

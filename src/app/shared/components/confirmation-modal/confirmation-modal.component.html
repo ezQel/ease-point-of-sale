@@ -1,0 +1,27 @@
+<div class="modal-header border-0">
+  <!-- MODAL TITLE -->
+  <h5 class="modal-title">{{ title }}</h5>
+  <!-- /MODAL TITLE -->
+</div>
+
+<div class="modal-body">
+  {{ text }}
+</div>
+
+<div class="modal-footer border-0 text-end">
+  <!-- CANCEL BUTTON -->
+  <button type="button" class="btn btn-md" (click)="modal.dismiss()">
+    Cancel
+  </button>
+  <!-- /CANCEL BUTTON -->
+
+  <!-- SAVE BUTTON -->
+  <button
+    type="button"
+    class="btn btn-md btn-primary ms-2"
+    (click)="modal.close()"
+  >
+    Confirm
+  </button>
+  <!-- /SAVE BUTTON -->
+</div>

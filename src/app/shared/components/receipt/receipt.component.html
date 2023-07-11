@@ -1,0 +1,134 @@
+<div style="font-family: 'Arial'; margin: 0px">
+  <div style="text-align: center; font-size: 13px">
+    <div style="margin-bottom: 8px">
+      <b>{{ shop?.name }} </b>
+    </div>
+    <div *ngIf="shop?.postalAddress" style="margin-bottom: 8px">
+      {{ shop?.postalAddress }}
+    </div>
+    <div *ngIf="shop?.phoneNumber" style="margin-bottom: 8px">
+      TEL: {{ shop?.phoneNumber }}
+    </div>
+    <div *ngIf="shop?.pinNumber" style="margin-bottom: 8px">
+      PIN: {{ shop?.pinNumber }}
+    </div>
+    <h3>Sales Receipt</h3>
+  </div>
+  <table style="width: 100%; font-size: 12px">
+    <tbody>
+      <tr>
+        <td>Tsc Code.</td>
+        <td>
+          <small>{{ receipt.id | uppercase }}</small>
+        </td>
+      </tr>
+      <tr *ngIf="receipt.mPesaCode">
+        <td>M-Pesa Code.</td>
+        <td>
+          <small>{{ receipt.mPesaCode | uppercase }}</small>
+        </td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td>{{ receipt.date.toDate() | date }}</td>
+      </tr>
+      <tr>
+        <td>Time</td>
+        <td>{{ receipt.date.toDate() | date : "HH:mm:ss" }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    style="
+      width: 100%;
+      margin-top: 24px;
+      border-collapse: collapse;
+      font-size: 12px;
+    "
+  >
+    <thead>
+      <tr
+        style="
+          color: gray;
+          border-top: 1px solid black;
+          border-bottom: 1px solid black;
+        "
+      >
+        <!-- <th style="font-weight: normal; text-align: start;">#</th> -->
+        <th style="font-weight: normal; text-align: start">ITEM</th>
+        <th style="font-weight: normal; text-align: start">QTY</th>
+        <th style="font-weight: normal; text-align: start">PRICE</th>
+        <th style="font-weight: normal; text-align: end">TOTAL</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of receipt?.items; index as i">
+        <!-- <td style="padding: 8px 0;">{{ i + 1 }}</td> -->
+        <td style="padding: 4px 0">{{ item.name }}</td>
+        <td style="padding: 4px 0">{{ item.quantity }}</td>
+        <td style="padding: 4px 0">{{ item.price }}</td>
+        <td style="padding: 4px 0; text-align: end">
+          KSH {{ item.price * item.quantity | number }}
+        </td>
+      </tr>
+      <ng-container *ngIf="receipt.discount">
+        <tr
+          style="border-top: 1px solid black"
+          [ngClass]="{ refunded: receipt.refunded || receipt.returned }"
+        >
+          <td></td>
+          <td></td>
+          <td style="padding: 4px 0; text-align: end">SUBTOTAL</td>
+          <td style="padding: 4px 0; text-align: end">
+            KSH {{ receipt.amount | number }}
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td style="padding: 4px 0; text-align: end">DISCOUNT</td>
+          <td style="padding: 4px 0; text-align: end">
+            KSH {{ receipt.discount | number }}
+          </td>
+        </tr>
+      </ng-container>
+      <tr style="border-top: 1px solid black">
+        <td></td>
+        <td></td>
+        <td style="padding: 4px 0; text-align: end"><b>TOTAL</b></td>
+        <td style="padding: 4px 0; text-align: end">
+          <b>KSH {{ receipt.amount - (receipt.discount || 0) | number }}</b>
+        </td>
+      </tr>
+      <tr style="border-top: 1px solid black; border-bottom: 1px solid black">
+        <td style="padding: 4px 0; text-align: end">PAID:</td>
+        <td style="padding: 4px 0; text-align: end">
+          KSH{{ receipt.payment | number }}
+        </td>
+        <td style="padding: 4px 0; text-align: end">CHANGE:</td>
+        <td style="padding: 4px 0; text-align: end">
+          KSH {{ receipt.change || 0 | number }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 32px; text-align: center">
+    <span style="font-size: 12px">
+      GOODS ONCE SOLD CANNOT BE <br />
+      RE-ACCEPTED
+    </span>
+    <br />
+    <span style="font-size: 12px"> THANK YOU FOR SHOPPING WITH US </span>
+    <br />
+    <span style="font-size: 12px"> YOU WERE SERVED BY: </span> <br />
+    <b style="font-size: 12px">
+      {{ receipt.soldBy.userName || receipt.soldBy.displayName | uppercase }}
+    </b>
+    <br />
+
+    <b style="font-size: 12px" *ngIf="copy">NB: RECEIPT COPY</b>
+  </p>
+  <div style="height: 130px" class="spacer"></div>
+  .
+</div>

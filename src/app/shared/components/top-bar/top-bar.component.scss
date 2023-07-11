@@ -1,0 +1,16 @@
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f6f7f8;
+    padding: 12px;
+}
+
+.user-name {
+    font-weight: 500;
+    margin-right: 12px;
+}
+
+.fa {
+    font-size: 18px;
+}

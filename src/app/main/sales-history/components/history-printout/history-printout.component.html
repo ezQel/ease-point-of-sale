@@ -1,0 +1,25 @@
+<div class="d-none d-print-block">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Transaction No.</th>
+        <th>Date</th>
+        <th>Items</th>
+        <th>Amount</th>
+        <th>Payment Method</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let sale of salesHistory">
+        <td>{{ sale.id }}</td>
+        <td>{{ sale.date?.toDate() | date : "d LLL yyyy HH:mm:ss" }}</td>
+        <td>{{ sale.items.length }}</td>
+        <td>
+          {{ (sale?.amount || 0) - (sale?.discount || 0) | currency : "KSH" }}
+        </td>
+        <td>{{ sale?.paymentMethod }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,25 @@
+<div class="rounded bg-white p-4 mt-4" *ngIf="user$ | async as user">
+  <div class="d-flex align-items-center mb-4">
+    <div class="me-4">
+      <i class="fa fa-user fs-1 text-muted"></i>
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="fs-5">
+        {{ user.displayName }}
+
+        <a (click)="changeName()" class="ms-2 btn btn-sm">
+          <i class="fa fa-pencil text-primary fs-6"></i>
+        </a>
+      </div>
+
+      <div>
+        {{ user.email }}
+      </div>
+    </div>
+  </div>
+
+  <button class="text-primary btn btn-sm" (click)="changePassword()">
+    Change Password
+  </button>
+</div>

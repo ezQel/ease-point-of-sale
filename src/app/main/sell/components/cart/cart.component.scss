@@ -1,0 +1,28 @@
+.cart-body {
+  height: 100%;
+}
+
+.checkout {
+  background-color: #fafafa;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top: 2px dotted rgb(218, 218, 218);
+
+  .sub-total {
+    font-size: 14px;
+  }
+}
+
+.btn-clear {
+  background-color: lighten($color: red, $amount: 42);
+}
+
+.no-items {
+  height: 100%;
+  margin: 96px 0;
+  font-size: 14px;
+}
+
+.fa-receipt {
+  font-size: 64px;
+}

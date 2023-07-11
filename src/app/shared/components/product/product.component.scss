@@ -1,0 +1,32 @@
+.product {
+  cursor: pointer;
+  user-select: none;
+  background-color: white;
+}
+
+.product-price {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.stock-size {
+  font-size: 14px;
+  color: var(--bs-success);
+}
+
+.out-of-stock {
+  .stock-size {
+    color: var(--bs-danger);
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: #999;
+}
+
+.low-stock {
+  .stock-size {
+    color: var(--bs-warning);
+  }
+}

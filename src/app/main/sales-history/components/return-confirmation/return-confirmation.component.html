@@ -1,0 +1,37 @@
+<div class="modal-header border-0">
+  <!-- MODAL TITLE -->
+  <h5 class="modal-title">Return products?</h5>
+  <!-- /MODAL TITLE -->
+</div>
+
+<div class="modal-body">
+  <p>The stock of the following returned products will increase:</p>
+
+  <ol>
+    <li *ngFor="let product of sale?.items">
+      {{ product.name }}
+      <small class="ms-4 text-success">+ {{ product.quantity }}</small>
+    </li>
+  </ol>
+
+  <p *ngIf="errorMessage" class="alert alert-danger my-2">{{ errorMessage }}</p>
+</div>
+
+<div class="modal-footer border-0 text-end">
+  <!-- CANCEL BUTTON -->
+  <button type="button" class="btn btn-md" (click)="modal.dismiss()">
+    Cancel
+  </button>
+  <!-- /CANCEL BUTTON -->
+
+  <!-- SAVE BUTTON -->
+  <button
+    (click)="returnGoods()"
+    type="button"
+    class="btn btn-md btn-primary ms-2"
+    [disabled]="btnDisabled"
+  >
+    Confirm
+  </button>
+  <!-- /SAVE BUTTON -->
+</div>

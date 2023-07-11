@@ -1,0 +1,70 @@
+<div class="px-lg-4">
+  <div class="d-flex align-items-center my-4">
+    <div class="flex-grow-1">
+      <!-- PERIOD FILTER -->
+      <app-period (periodChange)="getSalesHistory($event)"></app-period>
+      <!-- /PERIOD FILTER -->
+    </div>
+
+    <!-- SALES HISTORY LIST PRINTING BUTTON -->
+    <button appPrint="sales" class="btn btn-sm btn-primary me-2">
+      <i class="fa fa-print"></i> Print
+    </button>
+    <!-- /SALES HISTORY LIST PRINTING BUTTON -->
+  </div>
+
+  <ng-container *ngIf="salesHistory$ | async as salesHistory; else loading">
+    <ng-container *ngIf="salesHistory.length; else noSales">
+      <app-history-sale
+        *ngFor="let sale of salesHistory"
+        [sale]="sale"
+      ></app-history-sale>
+
+      <div id="sales" class="d-none d-print-block">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>TRANSACTION NO.</th>
+              <th>DATE</th>
+              <th>TiME</th>
+              <th>AMOUNT</th>
+              <th>PAYMENT METHOD</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <ng-container *ngFor="let sale of salesHistory; index as i">
+              <tr *ngIf="!(sale.refunded || sale.returned)">
+                <td>{{ i + 1 }}</td>
+                <td>{{ sale.id }}</td>
+                <td>{{ sale.date?.toDate() | date }}</td>
+                <td>{{ sale.date?.toDate() | date : "HH:mm:ss" }}</td>
+                <td>
+                  {{ sale.amount - sale.discount | currency }}
+                </td>
+                <td>{{ sale.paymentMethod }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+
+        <div class="text-end fw-bold fs-4">
+          Total: {{ salesHistory | salesTotal | currency }}
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- NO SALES MESSAGE -->
+    <ng-template #noSales>
+      <p class="text-center py-4">No sales in the period</p>
+    </ng-template>
+    <!-- /NO SALES MESSAGE -->
+  </ng-container>
+
+  <!-- LOADING INDICATOR -->
+  <ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+  </ng-template>
+  <!-- /LOADING INDICATOR -->
+</div>

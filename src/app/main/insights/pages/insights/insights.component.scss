@@ -1,0 +1,28 @@
+.currency {
+  &::before {
+    content: "KSH";
+    font-size: 10px;
+    margin-right: 8px;
+    color: #444;
+  }
+}
+
+.products-sold {
+  border-collapse: collapse;
+  width: 100%;
+
+  td,
+  th {
+    padding: 16px;
+  }
+
+  th {
+    color: gray;
+    font-weight: 400;
+  }
+
+  tr {
+    border-bottom: 1px solid rgb(234, 234, 234);
+
+  }
+}

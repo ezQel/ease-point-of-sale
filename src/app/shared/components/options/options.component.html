@@ -1,0 +1,17 @@
+<div ngbDropdown class="d-inline-block">
+  <button (click)="selectNextOption()" class="btn btn-sm pe-1">
+    <i class="fa fa-{{ icon }}"></i>
+  </button>
+
+  <button class="btn btn-sm ps-1 label" ngbDropdownToggle>
+    {{ currentOption }}
+  </button>
+
+  <div ngbDropdownMenu class="shadow">
+    <div class="text-muted px-2 pb-2 fs-12">
+      <small>{{ title }}</small>
+    </div>
+
+    <ng-content></ng-content>
+  </div>
+</div>

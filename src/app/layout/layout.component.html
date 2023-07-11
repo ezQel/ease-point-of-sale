@@ -1,0 +1,17 @@
+<ng-container *ngIf="user$ | async as user">
+  <ng-container *ngIf="admins$ | async as admins">
+    <section class="d-flex">
+      <app-side-menu *ngIf="admins.includes(user.email!)"></app-side-menu>
+
+      <section class="content flex-grow-1">
+        <app-top-bar></app-top-bar>
+
+        <main class="main-content">
+          <router-outlet></router-outlet>
+        </main>
+      </section>
+
+      <app-bottom-menu *ngIf="admins.includes(user.email!)"></app-bottom-menu>
+    </section>
+  </ng-container>
+</ng-container>

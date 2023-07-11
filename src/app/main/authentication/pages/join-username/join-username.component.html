@@ -1,0 +1,57 @@
+<div class="pt-5">
+  <header class="mb-4 mt-5 header text-center">
+    <img src="/assets/logo.svg" alt="logo." />
+  </header>
+
+  <main class="d-flex mt-4 justify-content-center">
+    <section class="create-account">
+      <h1 class="title text-center">What is your name?</h1>
+
+      <p class="subtitle">
+        2. Final step. Provide your name and press continue.
+      </p>
+
+      <p *ngIf="errorMessage" class="alert alert-danger">
+        <small>{{ errorMessage }}</small>
+      </p>
+
+      <form [formGroup]="userForm">
+        <div class="form-group">
+          <label for="name" class="form-label">Name</label>
+
+          <svg
+            class="form-group-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 0 24 24"
+            width="24px"
+            fill="#838383"
+          >
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
+            />
+          </svg>
+
+          <input
+            id="name"
+            type="text"
+            class="form-control"
+            placeholder="Enter your name"
+            formControlName="displayName"
+            required
+          />
+        </div>
+
+        <button
+          (click)="saveUsername()"
+          type="submit"
+          class="btn btn-primary login-btn mt-3"
+          [disabled]="buttonDisabled"
+        >
+          Continue
+        </button>
+      </form>
+    </section>
+  </main>
+</div>

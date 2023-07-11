@@ -1,0 +1,20 @@
+.shop {
+  width: 180px;
+  height: 180px;
+  background-color: #f9fafb;
+  cursor: pointer;
+  border-radius: 12px;
+  color: #444;
+
+  &:hover {
+    background-color: #f1f2f3;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .shop {
+    width: 45%;
+  }
+
+}
+

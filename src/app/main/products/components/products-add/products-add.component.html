@@ -1,0 +1,108 @@
+<div class="modal-header border-0">
+  <h5 class="modal-title">Add a Product</h5>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="productForm" class="row form">
+    <div class="col-12 mb-3">
+      <div class="form-group">
+        <label for="name" class="form-label">Product name *</label>
+
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          formControlName="name"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label for="price" class="form-label">Buying Price *</label>
+
+        <input
+          type="number"
+          id="price"
+          class="form-control"
+          formControlName="buyingPrice"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label for="price" class="form-label">Price *</label>
+
+        <input
+          type="number"
+          id="price"
+          class="form-control"
+          formControlName="price"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label for="stock" class="form-label">Stock *</label>
+
+        <input
+          type="number"
+          id="stock"
+          class="form-control"
+          formControlName="stockSize"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label for="reorder-level" class="form-label">Reorder level *</label>
+
+        <input
+          type="number"
+          id="reorder-level"
+          class="form-control"
+          formControlName="reorderLevel"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="form-group">
+        <label for="description" class="form-label">
+          Description (optional)
+        </label>
+
+        <textarea
+          id="description"
+          class="form-control"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+  </form>
+
+  <p *ngIf="errorMessage" class="alert alert-danger mt-4">{{ errorMessage }}</p>
+</div>
+
+<div class="modal-footer border-0 text-end">
+  <button type="button" class="btn btn-md" (click)="modal.dismiss()">
+    Cancel
+  </button>
+
+  <button
+    type="button"
+    class="btn btn-md btn-primary ms-2"
+    (click)="saveProduct()"
+    [disabled]="buttonDisabled"
+  >
+    Save
+  </button>
+</div>

@@ -1,0 +1,73 @@
+<div class="modal-header border-0">
+  <h5 class="modal-title">Modify Shop Info</h5>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="shopForm" class="form">
+    <p *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </p>
+
+    <div class="form-group mb-4">
+      <label for="shop-name" class="form-label">Shop Name *</label>
+
+      <input
+        id="shop-name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="phone-number" class="form-label">Phone Number</label>
+
+      <input
+        id="phone-number"
+        type="text"
+        class="form-control"
+        formControlName="phoneNumber"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="postal-address" class="form-label">Postal Address</label>
+
+      <input
+        id="postal-address"
+        type="text"
+        class="form-control"
+        formControlName="postalAddress"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label for="postal-address" class="form-label">PIN Number</label>
+
+      <input
+        id="postal-address"
+        type="text"
+        class="form-control"
+        formControlName="pinNumber"
+        required
+      />
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer border-0 text-end">
+  <button type="button" class="btn btn-md" (click)="modal.dismiss()">
+    Cancel
+  </button>
+
+  <button
+    type="button"
+    class="btn btn-md btn-primary ms-2"
+    (click)="updateShop()"
+  >
+    Save
+  </button>
+</div>

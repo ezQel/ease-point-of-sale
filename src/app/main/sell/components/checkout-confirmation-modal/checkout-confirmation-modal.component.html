@@ -1,0 +1,129 @@
+<div class="modal-header border-0">
+  <!-- MODAL TITLE -->
+  <h5 class="modal-title">Confirm Payment</h5>
+  <!-- /MODAL TITLE -->
+</div>
+
+<div class="modal-body">
+  <!-- PAYMENT FORM -->
+  <form [formGroup]="paymentInfoForm">
+    <!-- PAYMENT METHODS -->
+    <div class="mb-3 row">
+      <label class="mode-of-payment col-6 col-md-3">
+        <input type="radio" value="CASH" formControlName="paymentMethod" />
+        <div class="payment-name">
+          <i class="fa fa-money-bill text-muted"></i>CASH
+        </div>
+      </label>
+
+      <label class="mode-of-payment col-6 col-md-3">
+        <input type="radio" value="MPESA" formControlName="paymentMethod" />
+        <div class="payment-name">
+          <i class="fa fa-mobile text-muted"></i> M-PESA
+        </div>
+      </label>
+
+      <label class="mode-of-payment col-6 col-md-3">
+        <input type="radio" value="CREDIT" formControlName="paymentMethod" />
+        <div class="payment-name">
+          <i class="fa fa-handshake text-muted"></i> CREDIT
+        </div>
+      </label>
+
+      <label class="mode-of-payment col-6 col-md-3">
+        <input type="radio" value="OTHER" formControlName="paymentMethod" />
+        <div class="payment-name">
+          <i class="fa fa-credit-card text-muted"></i> OTHER
+        </div>
+      </label>
+    </div>
+    <!-- /PAYMENT METHODS -->
+
+    <!-- MPESA CODE FIELD -->
+    <div class="form-group mb-2" *ngIf="paymentMethodIsMpesa">
+      <label for="mpesa-code" class="form-label">M-PESA Code</label>
+      <input
+        id="mpesa-code"
+        type="text"
+        class="form-control"
+        formControlName="mPesaCode"
+      />
+    </div>
+    <!-- MPESA CODE FIELD -->
+
+    <!-- PAYMENT FIELD -->
+    <div class="form-group mb-2">
+      <label for="payment" class="form-label">Payment</label>
+      <input
+        id="payment"
+        type="number"
+        class="form-control"
+        formControlName="payment"
+      />
+    </div>
+    <!-- /PAYMENT FIELD -->
+
+    <!-- DISCOUNT FIELD -->
+    <div class="form-group">
+      <label for="discount" class="form-label">Discount</label>
+      <input
+        id="discount"
+        type="number"
+        class="form-control"
+        formControlName="discount"
+      />
+    </div>
+    <!-- /DISCOUNT FIELD -->
+  </form>
+  <!-- /PAYMENT FORM -->
+
+  <!-- TOTAL -->
+  <div class="d-flex my-4 pt-4 fw-bold">
+    <div class="flex-grow-1">Total</div>
+    <div>{{ total | currency }}</div>
+  </div>
+  <!-- /TOTAL -->
+
+  <!-- CHANGE -->
+  <div *ngIf="!paymentMethodIsMpesa" class="dotted pt-4 text-muted d-flex">
+    <div class="flex-grow-1">Change</div>
+    <div>{{ change | currency }}</div>
+  </div>
+  <!-- /CHANGE -->
+
+  <!-- ERROR MESSAGE -->
+  <p *ngIf="errorMessage" class="alert alert-danger my-2">{{ errorMessage }}</p>
+  <!-- /ERROR MESSAGE -->
+</div>
+
+<div class="modal-footer border-0 d-flex align-items-center">
+  <!-- PRINT CHECKBOX -->
+  <div class="form-check flex-grow-1">
+    <input
+      (change)="changePrintSetting($event)"
+      id="print-receipt"
+      type="checkbox"
+      class="form-check-input"
+      [formControl]="printReceipt"
+    />
+    <label for="print-receipt" class="form-check-label">Print receipt</label>
+  </div>
+  <!-- /PRINT CHECKBOX -->
+
+  <!-- CANCEL BUTTON -->
+  <button type="button" class="btn btn-md" (click)="modal.dismiss()">
+    Cancel
+  </button>
+  <!-- /CANCEL BUTTON -->
+
+  <!-- SAVE BUTTON -->
+  <button
+    type="button"
+    class="btn btn-md btn-primary ms-2"
+    (click)="checkout()"
+    [disabled]="btnDisabled"
+  >
+    Finish
+  </button>
+  <!-- /SAVE BUTTON -->
+</div>

@@ -1,0 +1,15 @@
+.content {
+  background-color: #f6f7f8;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.main-content {
+  padding: 0 12px;
+}
+
+@media screen and (max-width: 780px) {
+  .main-content {
+    padding-bottom: 120px;
+  }
+}

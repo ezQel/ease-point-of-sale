@@ -1,0 +1,15 @@
+.period {
+  position: relative;
+  cursor: pointer;
+
+  // Hide date picker inputs
+  mat-date-range-input {
+    position: absolute;
+    bottom: 0;
+    visibility: hidden;
+  }
+}
+
+.currency-label {
+  font-size: 10px;
+}

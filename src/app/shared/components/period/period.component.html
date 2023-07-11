@@ -1,0 +1,31 @@
+<div class=" period">
+  <span (click)="picker.open()">
+    <!-- DATE RANGE PICKER -->
+    <form [formGroup]="periodForm">
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate formControlName="start" />
+        <input matEndDate formControlName="end" />
+      </mat-date-range-input>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </form>
+    <!-- DATE RANGE PICKER -->
+
+    <!-- DATE ICON -->
+    <i class="fa fa-calendar text-secondary me-2"></i>
+    <!-- /DATE ICON -->
+
+    <!-- PERIOD DATES-->
+    <ng-container *ngIf="isToday; else notToday">Today</ng-container>
+    <ng-template #notToday>
+      <ng-container *ngIf="isSameDay; else dateRange">
+        {{ periodForm.value.start | date : "LLL d, yyyy" }}
+      </ng-container>
+      <ng-template #dateRange>
+        {{ periodForm.value.start | date : "LLL d, yyyy" }}
+        <i class="fa fa-arrow-right mx-4"></i>
+        {{ periodForm.value.end | date : "LLL d, yyyy" }}
+      </ng-template>
+    </ng-template>
+    <!-- /PERIOD DATES-->
+  </span>
+</div>

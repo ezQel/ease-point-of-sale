@@ -1,0 +1,30 @@
+:host {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top: 1px solid #f1f5fd;
+}
+
+.nav-link {
+  color: #777;
+  font-size: 12px;
+
+  .fa {
+    margin-bottom: 4px;
+    padding: 8px 12px;
+    font-size: 18px;
+  }
+}
+
+.nav-link.active {
+
+  .fa {
+    background-color: #f1f5fd;
+    border-radius: 12px;
+  }
+
+  color: var(--bs-primary);
+  font-weight: 600;
+}

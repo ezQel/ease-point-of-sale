@@ -1,0 +1,33 @@
+<h3 class="mb-4">Settings</h3>
+
+<ng-container *ngIf="user$ | async as user">
+  <ng-container *ngIf="admins$ | async as admins">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a routerLink="profile" class="nav-link" routerLinkActive="active">
+          Profile
+        </a>
+      </li>
+
+      <li *ngIf="admins.includes(user.email!)" class="nav-item">
+        <a routerLink="shop" class="nav-link" routerLinkActive="active">
+          Shop
+        </a>
+      </li>
+
+      <li *ngIf="admins.includes(user.email!)" class="nav-item">
+        <a routerLink="employees" class="nav-link" routerLinkActive="active">
+          Employees
+        </a>
+      </li>
+
+      <!-- <li class="nav-item">
+    <a routerLink="prefrences" class="nav-link" routerLinkActive="active">
+      Preferences
+    </a>
+  </li> -->
+    </ul>
+  </ng-container>
+</ng-container>
+
+<router-outlet></router-outlet>

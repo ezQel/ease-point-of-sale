@@ -1,0 +1,61 @@
+.form-control,
+.payment-name {
+  background-color: #eee;
+}
+
+.form-control {
+  border: none;
+  border-radius: 10px;
+  line-height: 32px;
+}
+
+.form-label {
+  font-size: 14px;
+}
+
+.mode-of-payment {
+  text-align: center;
+  cursor: pointer;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .payment-name {
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 14px;
+    transition: 300ms;
+  }
+
+  .fa {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  input[type="radio"]:checked+.payment-name {
+    position: relative;
+
+    &::after {
+      font-family: FontAwesome;
+      content: '\f058';
+      position: absolute;
+      font-size: 16px;
+      bottom: 8px;
+      right: 8px;
+      color: var(--bs-success);
+    }
+
+  }
+
+}
+
+.dotted {
+  border-top: 2px dotted #ddd;
+}
+
+.form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}

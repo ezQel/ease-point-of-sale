@@ -1,0 +1,71 @@
+<div class="px-lg-4">
+  <div class="form-group search my-2">
+    <input
+      [formControl]="search"
+      type="search"
+      class="form-control"
+      placeholder="Search products"
+      autofocus
+    />
+  </div>
+
+  <div class="my-4 d-lg-flex align-items-center">
+    <app-options
+      icon="sort"
+      title="Sort By"
+      value="stockSize"
+      (optionChange)="setOrderBy($event)"
+    >
+      <app-option value="stockSize">Stock Size</app-option>
+      <app-option value="price">Price</app-option>
+    </app-options>
+
+    <app-options
+      title="Sorting Order"
+      value="asc"
+      (optionChange)="setOrderDirection($event)"
+    >
+      <app-option icon="sort-amount-desc" value="asc">Ascending</app-option>
+      <app-option icon="sort-amount-asc" value="desc">Descending</app-option>
+    </app-options>
+
+    <div class="flex-grow-1 ms-lg-5 mt-3 mt-lg-0">
+      <span
+        class="badge bg-secondary me-4"
+        title="Total of products buying price"
+      >
+        <small>Stock cost:</small>
+        {{ stockCost | currency }}
+      </span>
+
+      <span class="badge bg-secondary" title="Total of products selling price">
+        <small>Stock value:</small>
+        {{ stockValue | currency }}
+      </span>
+    </div>
+
+    <button (click)="addProduct()" class="btn btn-sm btn-primary fab">
+      Add Product
+    </button>
+  </div>
+
+  <div class="row" *ngIf="products; else loading">
+    <div
+      *ngFor="let product of products.filteredData"
+      [ngClass]="{ 'col-md-6': view === 'GRID', 'col-12': view === 'LIST' }"
+    >
+      <app-product [product]="product" [modifiable]="true"></app-product>
+    </div>
+
+    <p
+      *ngIf="products.filteredData.length < 1"
+      class="text-center py-4 text-muted"
+    >
+      No products
+    </p>
+  </div>
+
+  <ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+  </ng-template>
+</div>

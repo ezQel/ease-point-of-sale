@@ -1,0 +1,35 @@
+.view {
+  .icon {
+    fill: #636363;
+  }
+
+  &.active {
+    background-color: #00809d15;
+
+    .icon {
+      fill: #00809d;
+    }
+  }
+
+  &:hover .icon {
+    fill: #00809d;
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: 62px;
+}
+
+.cart {
+  min-width: 30%;
+  background-color: white;
+  border-radius: 8px;
+  height: calc(100vh - 62px);
+  position: sticky;
+  top: 62px;
+}
+
+::ng-deep .mat-bottom-sheet-container  {
+  padding: 0 !important;
+}

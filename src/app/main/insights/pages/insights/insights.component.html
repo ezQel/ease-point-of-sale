@@ -1,0 +1,80 @@
+<div class="px-lg-4">
+  <!-- INSIGHTS PERIOD -->
+  <div class="mb-4">
+    <app-period (periodChange)="getInsights($event)"></app-period>
+  </div>
+  <!-- /INSIGHTS PERIOD -->
+
+  <ng-container *ngIf="insights$ | async as insights; else loading">
+    <div class="row">
+      <!-- TOTAL SALES -->
+      <div class="col-md-4">
+        <div class="shadow-sm p-4 bg-white rounded mb-4">
+          <p>Total Sales</p>
+          <h3 class="currency text-success">
+            {{ insights.totalSales | number }}
+          </h3>
+        </div>
+      </div>
+      <!-- /TOTAL SALES -->
+
+      <!-- PROFIT -->
+      <div class="col-md-4">
+        <div class="shadow-sm p-4 bg-white rounded mb-4">
+          <p>Profit</p>
+          <h3
+            class="currency"
+            [ngClass]="{
+              'text-success': insights.totalProfit > 0,
+              'text-warning': insights.totalProfit <= 0
+            }"
+          >
+            {{ insights.totalProfit | number }}
+          </h3>
+        </div>
+      </div>
+      <!-- /PROFIT -->
+
+      <!-- PROFIT -->
+      <div class="col-md-4">
+        <div class="shadow-sm p-4 bg-white rounded mb-4">
+          <p>Discounts</p>
+          <h3 class="currency text-primary">
+            {{ insights.totalDiscounts | number }}
+          </h3>
+        </div>
+      </div>
+      <!-- /PROFIT -->
+
+      <div class="col-md-4 mt-4">
+        <div class="shadow-sm rounded bg-white">
+          <div class="p-3">
+            <i class="fa fa-tachometer text-muted me-1"></i> Products Sold
+          </div>
+
+          <table class="products-sold">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let product of products; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+  </ng-template>
+</div>

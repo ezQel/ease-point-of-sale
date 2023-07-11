@@ -1,0 +1,62 @@
+<div
+  class="shadow-sm rounded p-4 mb-2 product"
+  [ngClass]="{
+    'out-of-stock ': isOutOfStock,
+    'low-stock': lowStock,
+    'card-hover-effect': !isOutOfStock && !modifiable,
+    disabled: isDisabled
+  }"
+>
+  <div class="d-flex align-items-end">
+    <div class="flex-grow-1">
+      <!-- PRODUCT NAME -->
+      <div class="product-name">
+        {{ product.name }}
+      </div>
+      <!-- /PRODUCT NAME -->
+
+      <!-- PRODUCT PRICE -->
+      <div class="product-price">
+        {{ product.price | currency : "KSh " }}
+      </div>
+      <!-- /PRODUCT PRICE -->
+    </div>
+
+    <div class="text-end">
+      <!-- ACTIONS DROPDOWN -->
+      <div ngbDropdown *ngIf="modifiable">
+        <button ngbDropdownToggle class="btn btn-sm no-caret">
+          <i class="fa fa-ellipsis-v"></i>
+        </button>
+
+        <div ngbDropdownMenu class="shadow">
+          <button
+            ngbDropdownItem
+            (click)="editProduct(product)"
+          >
+            Edit
+          </button>
+
+          <button
+            ngbDropdownItem
+            class="text-danger"
+            (click)="deleteProduct(product.id)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <!-- /ACTIONS DROPDOWN -->
+
+      <!-- STOCK SIZE -->
+      <div class="mt-2 stock-size">
+        <ng-container *ngIf="product.stockSize > 0; else outOfStockMessage">
+          {{ product.stockSize }} in stock
+        </ng-container>
+
+        <ng-template #outOfStockMessage> Out of stock </ng-template>
+      </div>
+      <!-- STOCK SIZE -->
+    </div>
+  </div>
+</div>

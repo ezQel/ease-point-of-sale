@@ -1,0 +1,21 @@
+<div class="cart-item py-3">
+  <div class="d-flex">
+    <div class="item-name flex-grow-1">{{ cartItem.name }}</div>
+    <div class="price">{{ cartItem.totalPrice | currency : "KSh " }}</div>
+  </div>
+  <div class="d-flex mt-2 align-items-end">
+    <div class="flex-grow-1 item-quantity">
+      <label for="quantity" class="form-label me-2 text-muted">Quantity</label>
+      <input
+        (change)="setQuantity(cartItem, $event)"
+        min="1"
+        [max]="cartItem.stockSize"
+        [value]="cartItem.quantity"
+        id="quantity"
+        class="form-control"
+        type="number"
+      />
+    </div>
+    <a (click)="remove(cartItem.id)" class="remove">Remove</a>
+  </div>
+</div>

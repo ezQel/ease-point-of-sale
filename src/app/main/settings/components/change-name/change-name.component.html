@@ -1,0 +1,41 @@
+<div class="modal-header border-0">
+  <h5 class="modal-title">Change Your Name</h5>
+</div>
+
+<form class="modal-body form">
+  <p *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </p>
+
+  <!-- NAME FIELD -->
+  <div class="form-group mb-4">
+    <label for="password" class="form-label">Name</label>
+
+    <input
+      id="password"
+      type="text"
+      class="form-control"
+      [formControl]="name"
+      required
+    />
+  </div>
+  <!-- /NAME FIELD -->
+</form>
+
+<div class="modal-footer border-0 text-end">
+  <!-- CANCEL BUTTON -->
+  <button type="button" class="btn btn-md" (click)="modal.dismiss()">
+    Cancel
+  </button>
+  <!-- /CANCEL BUTTON -->
+
+  <!-- UPDATE BUTTON -->
+  <button
+    type="button"
+    class="btn btn-md btn-primary ms-2"
+    (click)="updateName()"
+  >
+    Update
+  </button>
+  <!-- /UPDATE BUTTON -->
+</div>

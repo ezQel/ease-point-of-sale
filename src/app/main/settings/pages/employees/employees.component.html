@@ -1,0 +1,35 @@
+<ng-container *ngIf="(user$ | async)?.email as email">
+  <ng-container *ngIf="shop$ | async as shop">
+    <div class="my-4">
+      <button class="btn text-primary" (click)="addEmployee()">
+        Add an Employee
+      </button>
+    </div>
+
+    <div
+      *ngFor="let employee of shop.employees"
+      class="rounded bg-white p-4 d-flex align-items-center mb-2"
+    >
+      <div class="me-4">
+        <i class="fa fa-person fs-3 text-muted"></i>
+      </div>
+
+      <div class="flex-grow-1">
+        {{ employee }}
+      </div>
+
+      <small *ngIf="shop.admins.includes(employee)">
+        Admin <i class="fa text-muted fa-lock ms-2"></i>
+      </small>
+
+      <!-- Allow user to remove an employee if the user ia an admin and employee is not an admin -->
+      <button
+        *ngIf="shop.admins.includes(email) && !shop.admins.includes(employee)"
+        class="btn btn-sm text-danger fw-light"
+        (click)="removeEmployee(employee)"
+      >
+        Remove
+      </button>
+    </div>
+  </ng-container>
+</ng-container>

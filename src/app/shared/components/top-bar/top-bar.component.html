@@ -1,0 +1,45 @@
+<header class="d-flex align-items-center sticky-header">
+  <h1 class="flex-grow-1 text-primary text-bold">
+    <img class="d-lg-none" height="32" src="/assets/logo.svg" alt="logo." />
+  </h1>
+
+  <div ngbDropdown *ngIf="user$ | async as user">
+    <button class="btn text-muted d-flex align-items-center" ngbDropdownToggle>
+      <span class="user-name d-none d-lg-inline">{{ user.displayName }}</span>
+      <i class="fa fa-user"></i>
+    </button>
+
+    <div ngbDropdownMenu class="shadow">
+      <div class="px-4 py-2">
+        <div class="user-name mb-3">
+          <small class="text-muted">Shop</small> <br />
+          {{ (shop$ | async)?.name }}
+        </div>
+
+        <div class="user-name">
+          <small class="text-muted">Email</small> <br />
+          {{ user.email }}
+        </div>
+      </div>
+
+      <hr />
+
+      <button ngbDropdownItem routerLink="settings" class="py-3">
+        <i class="fa fa-cog"></i> Settings
+      </button>
+
+      <button
+        *ngIf="allowedToSwitchShops$ | async"
+        ngbDropdownItem
+        routerLink="onboarding"
+        class="py-3"
+      >
+        <i class="fa fa-exchange me-2"></i> Switch Shops
+      </button>
+
+      <button ngbDropdownItem (click)="logOut()" class="py-3">
+        <i class="fa fa-sign-out me-2"></i> Log out
+      </button>
+    </div>
+  </div>
+</header>

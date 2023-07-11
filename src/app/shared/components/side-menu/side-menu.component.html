@@ -1,0 +1,55 @@
+<aside class="d-none d-lg-flex flex-column flex-shrink-0 p-3 side-menu">
+  <a
+    href="/"
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+  >
+    <img height="48" src="/assets/logo.svg" alt="logo" />
+  </a>
+
+  <hr />
+
+  <ng-container *ngIf="user$ | async as user">
+    <ng-container *ngIf="admins$ | async as admins">
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li *ngIf="admins.includes(user.email!)">
+          <a routerLink="insights" routerLinkActive="active" class="nav-link">
+            <i class="fa fa-dashboard me-1"></i>
+            Insights
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="sell" routerLinkActive="active" class="nav-link">
+            <i class="fa fa-receipt me-1"></i>
+            Sell
+          </a>
+        </li>
+
+        <li *ngIf="admins.includes(user.email!)">
+          <a routerLink="products" routerLinkActive="active" class="nav-link">
+            <i class="fa fa-qrcode me-1"></i>
+            Products
+          </a>
+        </li>
+
+        <li *ngIf="admins.includes(user.email!)">
+          <a
+            routerLink="sales-history"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            <i class="fa fa-history me-1"></i>
+            Sales History
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="settings" routerLinkActive="active" class="nav-link">
+            <i class="fa fa-cog me-1"></i>
+            Settings
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
+</aside>

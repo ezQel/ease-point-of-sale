@@ -1,0 +1,31 @@
+<ng-container *ngIf="shop$ | async as shop">
+  <div class="rounded bg-white p-4 mt-4 d-flex align-items-center">
+    <div class="me-4">
+      <i class="fa fa-building fs-1 text-muted"></i>
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="fs-4">
+        {{ shop.name }}
+
+        <a (click)="editShopInfo()" class="ms-2 btn btn-sm">
+          <i class="fa fa-pencil text-primary fs-6"></i>
+        </a>
+      </div>
+
+      <div>
+        {{ shop.postalAddress }}
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="(user$ | async)?.email as email">
+    <button
+      *ngIf="shop.admins.includes(email)"
+      class="text-primary btn btn-sm mt-4"
+      routerLink="/onboarding/add-shop"
+    >
+      Add a shop
+    </button>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,58 @@
+<div class="cart-body d-flex flex-column">
+  <h5 class="p-3 pb-0">Cart</h5>
+
+  <ng-container *ngIf="cart.length; else noItems">
+    <!-- CART ITEMS-->
+    <div class="flex-grow-1 overflow-auto px-3">
+      <app-cart-item
+        *ngFor="let cartItem of cart"
+        [cartItem]="cartItem"
+      ></app-cart-item>
+    </div>
+    <!-- /CART ITEMS-->
+  </ng-container>
+
+  <!-- NO ITEMS MESSAGE -->
+  <ng-template #noItems>
+    <p class="text-center no-items text-muted">
+      <i class="fa fa-receipt mb-4"></i> <br />
+      Empty <br />
+      <small>Click on a product to add it to the cart</small>
+    </p>
+  </ng-template>
+  <!-- /NO ITEMS MESSAGE -->
+
+  <div class="checkout p-3">
+    <!-- SUBTOTAL -->
+    <div class="d-flex mb-4 sub-total">
+      <div class="flex-grow-1">Subtotal*</div>
+      <div class="total-price">{{ total | currency : "KSh " }}</div>
+    </div>
+    <!-- /SUBTOTAL -->
+
+    <div class="d-flex">
+      <!-- CLEAR BUTTON -->
+      <button (click)="clear()" class="btn btn-clear me-2">
+        <i class="fa fa-trash text-danger"></i>
+      </button>
+      <!-- /CLEAR BUTTON -->
+
+      <!-- CHECKOUT BUTTON -->
+      <button
+        (click)="checkout()"
+        class="btn btn-primary flex-grow-1"
+        [disabled]="cart.length < 1"
+      >
+        Checkout
+      </button>
+      <!-- CHECKOUT BUTTON -->
+    </div>
+  </div>
+</div>
+
+<app-receipt
+  id="sales-receipt"
+  class="d-none d-print-block"
+  *ngIf="receipt"
+  [receipt]="receipt"
+></app-receipt>

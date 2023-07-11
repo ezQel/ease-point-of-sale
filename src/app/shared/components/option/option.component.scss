@@ -1,0 +1,14 @@
+
+.active {
+  position: relative;
+  color: #00809d;
+  background-color: rgba(0, 128, 157, 0.07);
+
+  &::after {
+    content: url("/assets/icons/check.svg");
+    position: absolute;
+    margin-left: 16px;
+    right: 16px;
+    top: 6px;
+  }
+}

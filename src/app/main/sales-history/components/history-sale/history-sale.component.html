@@ -1,0 +1,118 @@
+<div
+  class="shadow-sm p-4 bg-white rounded mb-2 card-hover-effect"
+  [ngClass]="{ returned: isReturned }"
+  (click)="collapse.toggle()"
+>
+  <div class="card-body d-flex align-items-center">
+    <!-- SUMMARY -->
+    <div class="flex-grow-1 me-4">
+      <h6 class="d-inline">
+        {{ sale.amount - sale.discount | currency }}
+      </h6>
+
+      <small
+        class="ms-5"
+        [ngClass]="{
+          'text-success': sale.profit > 0,
+          'text-danger': sale.profit < 1
+        }"
+      >
+        <ng-container *ngIf="sale.profit > 0">+</ng-container>
+        {{ sale.profit | number }}
+      </small>
+      <br />
+
+      <small class="text-muted">
+        {{ sale.date?.toDate() | date : "d LLL yyyy HH:mm:ss" }} -
+        {{ sale.paymentMethod }}
+      </small>
+    </div>
+    <!-- / SUMMARY -->
+
+    <div *ngIf="isReturned" class="me-4 text-danger fst-italic">Returned</div>
+
+    <!-- ACTIONS DROPDOWN -->
+    <div ngbDropdown (click)="$event.stopPropagation()">
+      <button ngbDropdownToggle class="btn no-caret">
+        <i class="fa fa-ellipsis-v"></i>
+      </button>
+
+      <div ngbDropdownMenu class="shadow">
+        <button ngbDropdownItem [appPrint]="sale.id">Print</button>
+
+        <button
+          ngbDropdownItem
+          class="text-danger"
+          (click)="returnProducts(sale)"
+          [disabled]="isReturned"
+        >
+          Return
+        </button>
+      </div>
+    </div>
+    <!-- /ACTIONS DROPDOWN -->
+  </div>
+
+  <!-- RECEIPT -->
+  <app-receipt
+    class="d-none d-print-block"
+    [id]="sale.id"
+    [receipt]="sale"
+    [copy]="true"
+  ></app-receipt>
+  <!-- /RECEIPT -->
+
+  <!-- SALE DETAILS -->
+  <div #collapse="ngbCollapse" [ngbCollapse]="true">
+    <div class="p-4">
+      <h6>TRANSACTION NO. {{ sale.id }}</h6>
+
+      <div class="mb-4">
+        <small>Payment method: {{ sale.paymentMethod }}</small> <br />
+        <small>{{ sale.date?.toDate() | date : "d LLL yyyy HH:mm:ss" }}</small>
+      </div>
+
+      <!-- TABLE OF SALE ITEMS -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ITEM</th>
+            <th>QTY</th>
+            <th>UNIT PRICE</th>
+            <th>TOTAL PRICE</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of sale.items; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.price * item.quantity }}</td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="4">SUBTOTAL</td>
+            <td>{{ sale.amount | number }}</td>
+          </tr>
+          <tr>
+            <td colspan="4">DISCOUNT</td>
+            <td>{{ sale.discount | number }}</td>
+          </tr>
+          <tr>
+            <td colspan="4">TOTAL</td>
+            <td>
+              {{ sale.amount - sale.discount | number }}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <!-- /TABLE OF SALE ITEMS -->
+    </div>
+  </div>
+  <!-- /SALE DETAILS -->
+</div>
