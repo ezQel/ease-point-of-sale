@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-join-username',
   templateUrl: './join-username.component.html',
@@ -16,7 +15,10 @@ export class JoinUsernameComponent {
     displayName: new FormControl(),
   });
 
-  constructor(private auth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private auth: AngularFireAuth,
+    private router: Router,
+  ) {}
 
   saveUsername(): void {
     this.errorMessage = null;
@@ -27,17 +29,15 @@ export class JoinUsernameComponent {
       return;
     }
 
-    const sub = this.auth.user.subscribe((user) => {
+    this.auth.user.subscribe((user) => {
       user?.updateProfile(profile).then(
         () => {
           this.router.navigate(['/onboarding/select-shop']);
         },
         () => {
           this.errorMessage = 'Something went wrong. Please try again.';
-        }
+        },
       );
     });
-
-    sub.unsubscribe();
   }
 }
