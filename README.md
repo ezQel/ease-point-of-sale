@@ -1,14 +1,27 @@
 # EasePos
+A point-of-sale application built with Angular. Supports managing multiple shops and basic user roles, with Capacitor for Android builds.
 
+## Tech Stack
+- Angular 15
+- Bootstrap 5
+- Firebase
+- Capacitor
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+
+## Firebase config
+Add your testing or production firebase configs into the environment file(s) as shown below:
+```
+export const environment = {
+  production: false,
+  firebase: {
+    ...firebaseConfig,
+  },
+};
+```
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
